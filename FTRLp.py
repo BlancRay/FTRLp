@@ -239,6 +239,12 @@ class DataGen(object):
                 index = to_hash(key + '_' + value) % (self.mf - size) + size
                 x[index] = 1.
 
+                # --- Save Name
+                # Save the name and index to the names dictionary if its a new feature
+                # AND if there's still enough space.
+                if key + '_' + value not in self.names and len(self.names) < self.mf:
+                    self.names[key + '_' + value] = index
+
             # Yield everything.
             yield t, ids, x, y
 
